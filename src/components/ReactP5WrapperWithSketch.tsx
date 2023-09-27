@@ -25,14 +25,14 @@ export function ReactP5WrapperWithSketch<
       sketch,
       wrapperRef.current
     );
+
+    return () => removeCanvasInstance(canvasInstanceRef);
   }, [sketch]);
 
   useEffect(() => {
     /** @see https://github.com/P5-wrapper/react/issues/207 */
     canvasInstanceRef.current?.updateWithProps?.(rest as unknown as Props);
   }, [rest, wrapperRef]);
-
-  useEffect(() => () => removeCanvasInstance(canvasInstanceRef), []);
 
   return (
     <div ref={wrapperRef} className={P5WrapperClassName}>
